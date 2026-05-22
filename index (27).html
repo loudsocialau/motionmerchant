@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Motion Merchant — Cinematic Ecommerce Production</title>
+<meta name="description" content="Premium AI-powered motion content and product stills. No calls. No meetings. Just fire creative delivered.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@300;400;500;600&family=Space+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#08070F;--s1:#0D0C1A;--s2:#111022;--v:#8B5CF6;--vl:#A78BFA;--c:#F43F5E;--t:#06B6D4;--g:#10B981;--w:rgba(255,255,255,.93);--m:rgba(255,255,255,.45);--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.14)}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:#08070F;color:#fff;font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2rem;transition:background .3s}
+nav.stuck{background:rgba(8,7,15,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Unbounded',sans-serif;font-size:.95rem;font-weight:900;letter-spacing:-.03em;text-decoration:none;color:#fff}
+.logo em{font-style:normal;background:linear-gradient(135deg,#A78BFA,#F43F5E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-ul{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-ul a{text-decoration:none;color:rgba(255,255,255,.45);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.nav-ul a:hover{color:#fff}
+.nav-cta{background:linear-gradient(135deg,#8B5CF6,#F43F5E)!important;-webkit-text-fill-color:#fff!important;color:#fff!important;padding:.5rem 1.3rem;border-radius:100px;font-weight:600!important}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.3rem;z-index:400}
+.ham span{display:block;width:22px;height:1.5px;background:#fff;border-radius:2px;transition:all .3s}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(max-width:768px){
+  .ham{display:flex}
+  .nav-ul{display:none;position:fixed;top:0;left:0;right:0;bottom:0;flex-direction:column;justify-content:center;align-items:center;background:rgba(8,7,15,.98);gap:2rem;z-index:300}
+  .nav-ul.open{display:flex}
+  .nav-ul a{font-size:1.1rem;padding:1rem}
+}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:7rem 1.25rem 4rem;position:relative;overflow:hidden}
+#hc{position:absolute;inset:0;width:100%;height:100%}
+.hero-inner{position:relative;z-index:2;max-width:800px;width:100%}
+.pill{display:inline-flex;align-items:center;gap:7px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.28);border-radius:100px;padding:5px 16px;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:#C4B5FD;margin-bottom:1.8rem}
+.blink{width:6px;height:6px;border-radius:50%;background:#06B6D4;animation:blink 1.6s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+h1.hero-h{font-family:'Unbounded',sans-serif;font-size:clamp(2.6rem,9vw,7.5rem);font-weight:900;line-height:.88;letter-spacing:-.05em;margin-bottom:1.3rem}
+.grad{background:linear-gradient(135deg,#A78BFA 0%,#F43F5E 50%,#06B6D4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200%;animation:gm 4s ease infinite}
+@keyframes gm{0%,100%{background-position:0%}50%{background-position:100%}}
+.outline{-webkit-text-stroke:1.5px rgba(255,255,255,.22);-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(.88rem,2vw,1.05rem);color:rgba(255,255,255,.45);max-width:480px;margin:0 auto 2rem;line-height:1.72;font-weight:300}
+.hero-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.85rem 1.9rem;border-radius:100px;font-weight:600;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .25s;text-decoration:none;border:none;font-family:'Inter',sans-serif}
+.btn-p{background:linear-gradient(135deg,#8B5CF6,#F43F5E);color:#fff;box-shadow:0 0 36px rgba(139,92,246,.3)}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 0 55px rgba(139,92,246,.5)}
+.btn-g{background:transparent;border:1px solid rgba(255,255,255,.15);color:#fff}
+.btn-g:hover{border-color:rgba(255,255,255,.3)}
+.proof-row{display:flex;gap:clamp(1rem,4vw,2.5rem);justify-content:center;flex-wrap:wrap}
+.proof-n{font-family:'Space Mono',monospace;font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;background:linear-gradient(135deg,#06B6D4,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.proof-l{font-size:.6rem;color:rgba(255,255,255,.3);letter-spacing:.14em;text-transform:uppercase;margin-top:.2rem}
+.sdot{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:#06B6D4;animation:sd 2s ease-in-out infinite;opacity:.4}
+@keyframes sd{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* TICKER */
+.ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.85rem 0;background:rgba(139,92,246,.03)}
+.tt{display:flex;gap:2rem;animation:tr 22s linear infinite;width:max-content}
+.ti{display:flex;align-items:center;gap:.6rem;white-space:nowrap;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.td{width:4px;height:4px;border-radius:50%;flex-shrink:0}
+.dv{background:#8B5CF6}.dc{background:#F43F5E}.dt{background:#06B6D4}
+@keyframes tr{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:5rem 1.25rem}
+.con{max-width:1140px;margin:0 auto}
+.chip{display:inline-block;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#06B6D4;border:1px solid rgba(6,182,212,.28);padding:3px 11px;border-radius:100px;font-family:'Space Mono',monospace;margin-bottom:.85rem}
+.sec-h{font-family:'Unbounded',sans-serif;font-size:clamp(1.8rem,5vw,3.5rem);font-weight:900;line-height:.95;letter-spacing:-.04em;margin-bottom:1.4rem}
+.rev{opacity:0;transform:translateY(32px);transition:opacity .7s,transform .7s}
+.rev.on{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* VIDEO */
+.vid-section{background:linear-gradient(180deg,#08070F 0%,rgba(139,92,246,.05) 50%,#08070F 100%)}
+.vid-wrap{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;max-width:880px;margin:2rem auto 0}
+.vid-wrap video{width:100%;display:block;max-height:500px;object-fit:cover}
+.vid-bar{position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.5rem;background:linear-gradient(to top,rgba(8,7,15,.95),transparent);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+.vid-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(244,63,94,.2);border:1px solid rgba(244,63,94,.35);border-radius:100px;padding:4px 11px;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#FDA4AF;font-family:'Space Mono',monospace}
+.rdot{width:5px;height:5px;border-radius:50%;background:#F43F5E;animation:blink 1.4s infinite}
+.vid-info-title{font-family:'Unbounded',sans-serif;font-size:.78rem;font-weight:700;text-align:right}
+.vid-info-sub{font-size:.6rem;color:rgba(255,255,255,.4);font-family:'Space Mono',monospace;text-align:right;margin-top:.15rem}
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:62px;height:62px;border-radius:50%;background:rgba(139,92,246,.85);border:2px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;backdrop-filter:blur(8px)}
+.play-btn:hover{transform:translate(-50%,-50%) scale(1.1);background:#8B5CF6}
+.play-btn svg{width:20px;height:20px;fill:#fff;margin-left:3px}
+.play-btn.hide{opacity:0;pointer-events:none}
+.vid-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-top:.75rem;max-width:880px;margin-left:auto;margin-right:auto}
+@media(max-width:500px){.vid-stats{grid-template-columns:1fr 1fr}}
+.vs{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;padding:.85rem;text-align:center;transition:all .25s}
+.vs:hover{border-color:var(--border2);transform:translateY(-2px)}
+.vs-n{font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;background:linear-gradient(135deg,#A78BFA,#F43F5E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.vs-l{font-size:.58rem;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin-top:.2rem}
+
+/* WORK GRID */
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:.65rem;margin-top:1.8rem}
+.wc{border-radius:12px;overflow:hidden;position:relative;cursor:pointer}
+.wc.big{grid-column:1/3;aspect-ratio:16/9}
+.wc.tall{grid-row:1/3;aspect-ratio:9/18}
+.wc.sm{aspect-ratio:4/3}
+.wc canvas{width:100%;height:100%;display:block;transition:transform .5s ease}
+.wc:hover canvas{transform:scale(1.05)}
+.wover{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,7,15,.96) 0%,rgba(8,7,15,.3) 50%,transparent 100%);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.1rem}
+.wc:hover .wover{opacity:1}
+.wtag{display:inline-block;padding:3px 9px;border-radius:100px;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:.35rem}
+.tv{background:rgba(139,92,246,.28);color:#C4B5FD;border:1px solid rgba(139,92,246,.38)}
+.tc{background:rgba(244,63,94,.22);color:#FDA4AF;border:1px solid rgba(244,63,94,.32)}
+.tt2{background:rgba(6,182,212,.18);color:#67E8F9;border:1px solid rgba(6,182,212,.28)}
+.tg{background:rgba(16,185,129,.18);color:#6EE7B7;border:1px solid rgba(16,185,129,.28)}
+.wname{font-family:'Unbounded',sans-serif;font-size:.78rem;font-weight:700;line-height:1.2}
+.wsub{font-size:.65rem;color:rgba(255,255,255,.45);margin-top:.2rem}
+@media(max-width:600px){
+  .wgrid{grid-template-columns:1fr 1fr}
+  .wc.big{grid-column:1/3;aspect-ratio:4/3}
+  .wc.tall{grid-row:auto;aspect-ratio:1/1}
+}
+
+/* SERVICES */
+.sv-bg{background:linear-gradient(180deg,#08070F 0%,rgba(139,92,246,.04) 50%,#08070F 100%)}
+.sv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;margin-top:1.8rem}
+@media(max-width:860px){.sv-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.sv-grid{grid-template-columns:1fr}}
+.svc{border:1px solid var(--border);border-radius:12px;padding:1.8rem 1.3rem;background:rgba(255,255,255,.02);transition:all .28s;position:relative;overflow:hidden}
+.svc:hover{border-color:var(--border2);transform:translateY(-4px)}
+.svc-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1.3rem}
+.iv{background:rgba(139,92,246,.18)}.ic{background:rgba(244,63,94,.18)}.it{background:rgba(6,182,212,.14)}.ig{background:rgba(16,185,129,.14)}
+.svc-n{font-family:'Space Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.35);letter-spacing:.08em;margin-bottom:.55rem}
+.svc-t{font-family:'Unbounded',sans-serif;font-size:.78rem;font-weight:700;margin-bottom:.6rem}
+.svc-d{font-size:.76rem;color:rgba(255,255,255,.42);line-height:1.65}
+
+/* PROCESS */
+.proc-bg{background:linear-gradient(180deg,#08070F 0%,rgba(6,182,212,.03) 50%,#08070F 100%)}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;margin-top:1.8rem}
+@media(max-width:640px){.pgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:380px){.pgrid{grid-template-columns:1fr}}
+.ps{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.1rem;transition:all .25s;position:relative}
+.ps::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:12px 12px 0 0;opacity:0;transition:opacity .3s}
+.ps:nth-child(1)::before{background:#8B5CF6}
+.ps:nth-child(2)::before{background:#F43F5E}
+.ps:nth-child(3)::before{background:#06B6D4}
+.ps:nth-child(4)::before{background:#10B981}
+.ps:hover::before{opacity:1}
+.ps:hover{border-color:var(--border2);transform:translateY(-3px)}
+.pb{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;margin-bottom:1.1rem}
+.b1{background:rgba(139,92,246,.18);color:#C4B5FD;border:1px solid rgba(139,92,246,.32)}
+.b2{background:rgba(244,63,94,.18);color:#FDA4AF;border:1px solid rgba(244,63,94,.32)}
+.b3{background:rgba(6,182,212,.14);color:#67E8F9;border:1px solid rgba(6,182,212,.28)}
+.b4{background:rgba(16,185,129,.14);color:#6EE7B7;border:1px solid rgba(16,185,129,.28)}
+.ps-t{font-family:'Unbounded',sans-serif;font-size:.76rem;font-weight:700;margin-bottom:.5rem}
+.ps-d{font-size:.74rem;color:rgba(255,255,255,.42);line-height:1.6}
+
+/* PRICING */
+.pgrid2{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-top:1.8rem}
+@media(max-width:780px){.pgrid2{grid-template-columns:1fr}}
+.pc{border:1px solid var(--border);border-radius:14px;padding:1.8rem;background:rgba(255,255,255,.02);transition:all .25s;position:relative;overflow:hidden}
+.pc:hover{transform:translateY(-4px);border-color:var(--border2)}
+.pc.hot{border-color:rgba(139,92,246,.42);background:rgba(139,92,246,.05)}
+.pc.hot::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#8B5CF6,#F43F5E,#06B6D4)}
+.hbadge{display:inline-block;background:linear-gradient(135deg,#8B5CF6,#F43F5E);color:#fff;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:.9rem;font-weight:700}
+.pc-name{font-family:'Unbounded',sans-serif;font-size:.9rem;font-weight:900;margin-bottom:.3rem}
+.pc-price{font-family:'Space Mono',monospace;font-size:2.4rem;font-weight:700;line-height:1;margin-bottom:.2rem}
+.pc.hot .pc-price{background:linear-gradient(135deg,#A78BFA,#F43F5E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pc-per{font-size:.68rem;color:rgba(255,255,255,.28);margin-bottom:1.3rem}
+.pdiv{height:1px;background:var(--border);margin:1.1rem 0}
+.plist{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.1rem}
+.plist li{font-size:.74rem;color:rgba(255,255,255,.55);display:flex;gap:.5rem;line-height:1.45}
+.ck{color:#10B981;flex-shrink:0}
+.pmarg{font-family:'Space Mono',monospace;font-size:.62rem;color:#10B981;margin-bottom:1.1rem}
+.pbtn{display:block;width:100%;padding:.82rem;border-radius:100px;font-weight:600;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .22s;border:none;font-family:'Inter',sans-serif}
+.pf{background:linear-gradient(135deg,#8B5CF6,#F43F5E);color:#fff;box-shadow:0 0 26px rgba(139,92,246,.28)}
+.pf:hover{box-shadow:0 0 42px rgba(139,92,246,.5)}
+.po{background:transparent;border:1px solid var(--border2);color:#fff}
+.po:hover{border-color:rgba(255,255,255,.28)}
+.rbar{margin-top:.65rem;padding:1.5rem 1.8rem;border:1px solid rgba(6,182,212,.2);border-radius:14px;background:rgba(6,182,212,.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.85rem}
+.rb-lbl{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#06B6D4;margin-bottom:.2rem}
+.rb-title{font-family:'Unbounded',sans-serif;font-size:.95rem;font-weight:900}
+.rb-desc{font-size:.75rem;color:rgba(255,255,255,.4);max-width:260px;line-height:1.5}
+.rb-price{font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;background:linear-gradient(135deg,#06B6D4,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+
+/* CALC */
+.calc-bg{background:linear-gradient(180deg,#08070F 0%,rgba(139,92,246,.04) 50%,#08070F 100%)}
+.calc-box{background:#0D0C1A;border:1px solid var(--border);border-radius:16px;padding:2.2rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+@media(max-width:660px){.calc-box{grid-template-columns:1fr;padding:1.5rem}}
+.clbl{font-size:.6rem;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.45rem;font-family:'Space Mono',monospace}
+.cslide{margin-bottom:1.4rem}
+.rhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+.rval{font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;color:#C4B5FD}
+input[type=range]{-webkit-appearance:none;width:100%;height:3px;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#F43F5E);cursor:pointer;border:2px solid #08070F}
+.ptabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.ptab{padding:5px 13px;border-radius:100px;font-size:.65rem;font-weight:600;border:1px solid var(--border);background:transparent;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.ptab.on{background:rgba(139,92,246,.18);border-color:rgba(139,92,246,.42);color:#C4B5FD}
+.calc-r{background:#111022;border-radius:12px;padding:1.4rem;border:1px solid var(--border)}
+.crow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
+.crow:last-of-type{border:none}
+.cl{font-size:.72rem;color:rgba(255,255,255,.4)}
+.cv{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700}
+.cvv{color:#C4B5FD}.cvg{color:#6EE7B7}.cvc{color:#FDA4AF}
+.total{margin-top:1.1rem;padding:1.2rem;background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(244,63,94,.07));border:1px solid rgba(139,92,246,.2);border-radius:11px;text-align:center}
+.tl{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.35rem}
+.tn{font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;background:linear-gradient(135deg,#A78BFA,#F43F5E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tm{display:inline-block;background:rgba(16,185,129,.14);border:1px solid rgba(16,185,129,.28);color:#6EE7B7;font-size:.62rem;padding:3px 10px;border-radius:100px;margin-top:.45rem;font-family:'Space Mono',monospace}
+
+/* NICHES */
+.niche-sec{padding:3.5rem 0;overflow:hidden;border-top:1px solid var(--border)}
+.nrow{overflow:hidden;margin-bottom:.45rem}
+.ntrack{display:flex;gap:.45rem;width:max-content}
+.nr1{animation:ns 17s linear infinite}
+.nr2{animation:ns 21s linear infinite reverse}
+.ntag{padding:.48rem 1.1rem;border-radius:100px;font-size:.7rem;letter-spacing:.07em;white-space:nowrap;transition:transform .2s}
+.ntag:hover{transform:scale(1.06)}
+.nv{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.22);color:#C4B5FD}
+.nc{background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.22);color:#FDA4AF}
+.nt{background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2);color:#67E8F9}
+@keyframes ns{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* TECH */
+.tech-sec{text-align:center;border-top:1px solid var(--border)}
+.tpills{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;margin-top:1.8rem}
+.tp{padding:.48rem 1.25rem;border-radius:100px;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .25s;font-family:'Space Mono',monospace}
+.tp-on{background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.35);color:#C4B5FD}
+.tp-off{background:rgba(255,255,255,.02);border:1px solid var(--border);color:rgba(255,255,255,.4)}
+.tp-off:hover{border-color:var(--border2);color:#fff}
+
+/* ABOUT */
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+@media(max-width:740px){.ag{grid-template-columns:1fr;gap:2.5rem}}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.1rem}
+.stat{background:#0D0C1A;border:1px solid var(--border);border-radius:11px;padding:1.3rem;text-align:center;transition:all .25s}
+.stat:hover{border-color:var(--border2);transform:translateY(-3px)}
+.sn{font-family:'Space Mono',monospace;font-size:1.7rem;font-weight:700;display:block;line-height:1;margin-bottom:.22rem}
+.snv{background:linear-gradient(135deg,#A78BFA,#F43F5E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.snt{background:linear-gradient(135deg,#06B6D4,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sl{font-size:.56rem;color:rgba(255,255,255,.28);letter-spacing:.14em;text-transform:uppercase}
+.insight{background:linear-gradient(135deg,rgba(139,92,246,.09),rgba(6,182,212,.05));border:1px solid rgba(139,92,246,.2);border-radius:11px;padding:1.3rem}
+.insight p{font-size:.8rem;color:rgba(255,255,255,.52);line-height:1.75;font-style:italic}
+.insight footer{font-family:'Space Mono',monospace;font-size:.58rem;color:#06B6D4;letter-spacing:.14em;text-transform:uppercase;margin-top:.65rem}
+.about-body{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.8;margin-bottom:1.5rem}
+.apts{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.apts li{font-size:.78rem;color:rgba(255,255,255,.5);display:flex;gap:.6rem;line-height:1.5}
+.apc{color:#F43F5E;flex-shrink:0;font-weight:700}
+
+/* CTA */
+.cta-sec{text-align:center;position:relative;overflow:hidden;padding:9rem 1.25rem}
+.cg1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.18) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cg2{position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(244,63,94,.1) 0%,transparent 70%);top:40%;left:45%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-h{font-family:'Unbounded',sans-serif;font-size:clamp(2.2rem,8vw,5.5rem);font-weight:900;line-height:.88;letter-spacing:-.05em;margin-bottom:1.1rem;position:relative;z-index:1}
+.cta-sub{font-size:.95rem;color:rgba(255,255,255,.42);max-width:380px;margin:0 auto 2rem;font-weight:300;line-height:1.7;position:relative;z-index:1}
+.cta-note{font-family:'Space Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.22);letter-spacing:.12em;text-transform:uppercase;margin-top:1.1rem;position:relative;z-index:1}
+
+/* FOOTER */
+footer{padding:1.8rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.85rem}
+.fl{font-family:'Unbounded',sans-serif;font-size:.82rem;font-weight:900}
+.fl em{font-style:normal;background:linear-gradient(135deg,#A78BFA,#F43F5E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+footer p{font-size:.62rem;color:rgba(255,255,255,.18);letter-spacing:.06em}
+.flinks{display:flex;gap:1.3rem}
+.flinks a{font-size:.62rem;color:rgba(255,255,255,.25);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.flinks a:hover{color:#06B6D4}
+@media(max-width:500px){footer{flex-direction:column;text-align:center}.flinks{justify-content:center}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">Motion<em>.</em>Merchant</a>
+  <button class="ham" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-ul" id="nul">
+    <li><a href="#reel" onclick="closeNav()">Reel</a></li>
+    <li><a href="#work" onclick="closeNav()">Work</a></li>
+    <li><a href="#pricing" onclick="closeNav()">Pricing</a></li>
+    <li><a href="#calculator" onclick="closeNav()">Calculator</a></li>
+    <li><a href="#contact" onclick="closeNav()" class="nav-cta">Get Started →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="hc"></canvas>
+  <div class="hero-inner">
+    <div class="pill"><div class="blink"></div>AI Creative Studio — Est. 2025</div>
+    <h1 class="hero-h">
+      <span class="grad" style="display:block">CINEMATIC</span>
+      <span class="outline" style="display:block">ECOMMERCE</span>
+      <span style="display:block">VISUALS</span>
+    </h1>
+    <p class="hero-sub">Premium AI-powered motion content and product stills for brands that demand extraordinary. No calls. No meetings. Just fire creative — delivered.</p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn btn-p">Shop Packs — From $690</a>
+      <a href="#reel" class="btn btn-g">Watch Our Reel ↓</a>
+    </div>
+    <div class="proof-row">
+      <div><div class="proof-n">5 days</div><div class="proof-l">Turnaround</div></div>
+      <div><div class="proof-n">60–75%</div><div class="proof-l">Gross Margins</div></div>
+      <div><div class="proof-n">0 calls</div><div class="proof-l">Required</div></div>
+      <div><div class="proof-n">∞</div><div class="proof-l">Scale</div></div>
+    </div>
+  </div>
+  <div class="sdot"></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="tt">
+    <span class="ti"><span class="td dv"></span>Cinematic Motion</span>
+    <span class="ti"><span class="td dc"></span>Luxury Product Stills</span>
+    <span class="ti"><span class="td dt"></span>Ad-Ready Creative</span>
+    <span class="ti"><span class="td dv"></span>Platform-Native Content</span>
+    <span class="ti"><span class="td dc"></span>Hero Campaigns</span>
+    <span class="ti"><span class="td dt"></span>Ecommerce Launch Kits</span>
+    <span class="ti"><span class="td dv"></span>Visual Storytelling</span>
+    <span class="ti"><span class="td dc"></span>Motion-First Production</span>
+    <span class="ti"><span class="td dv"></span>Cinematic Motion</span>
+    <span class="ti"><span class="td dc"></span>Luxury Product Stills</span>
+    <span class="ti"><span class="td dt"></span>Ad-Ready Creative</span>
+    <span class="ti"><span class="td dv"></span>Platform-Native Content</span>
+    <span class="ti"><span class="td dc"></span>Hero Campaigns</span>
+    <span class="ti"><span class="td dt"></span>Ecommerce Launch Kits</span>
+    <span class="ti"><span class="td dv"></span>Visual Storytelling</span>
+    <span class="ti"><span class="td dc"></span>Motion-First Production</span>
+  </div>
+</div>
+
+<!-- VIDEO REEL -->
+<section class="vid-section" id="reel">
+  <div class="con">
+    <div class="chip rev">Sample Reel</div>
+    <h2 class="sec-h rev d1">THIS IS WHAT<br><span class="grad">WE MAKE.</span></h2>
+    <p style="color:rgba(255,255,255,.42);font-size:.83rem;line-height:1.7;max-width:400px;margin-bottom:0" class="rev d2">Real output. AI-powered workflows. Cinematic results that make brands impossible to scroll past.</p>
+    <div class="vid-wrap rev d2">
+      <video id="vid" src="sample.mp4" loop playsinline preload="metadata" style="cursor:pointer"></video>
+      <div class="play-btn" id="pbtn" onclick="toggleV()">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <div class="vid-bar">
+        <div class="vid-badge"><div class="rdot"></div>Motion Merchant — Live Sample</div>
+        <div><div class="vid-info-title">Cinematic Product Reel</div><div class="vid-info-sub">AI-Generated · Motion Content</div></div>
+      </div>
+    </div>
+    <div class="vid-stats rev d3">
+      <div class="vs"><div class="vs-n">AI</div><div class="vs-l">Powered Workflow</div></div>
+      <div class="vs"><div class="vs-n">48h</div><div class="vs-l">Concept to Delivery</div></div>
+      <div class="vs"><div class="vs-n">4K</div><div class="vs-l">Export Ready</div></div>
+      <div class="vs"><div class="vs-n">∞</div><div class="vs-l">Variations Available</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="con">
+    <div class="chip rev">Portfolio</div>
+    <h2 class="sec-h rev d1">CINEMATIC<br>PRODUCTION</h2>
+    <div class="wgrid rev d2">
+      <div class="wc big"><canvas id="c1" width="800" height="450"></canvas><div class="wover"><span class="wtag tv">Hero Campaign</span><div class="wname">Matcha Ritual — Motion Suite</div><div class="wsub">15 stills · 8 clips · ad variants</div></div></div>
+      <div class="wc tall"><canvas id="c2" width="400" height="720"></canvas><div class="wover"><span class="wtag tc">Skincare</span><div class="wname">Aura Serum</div><div class="wsub">Product story · TikTok</div></div></div>
+      <div class="wc sm"><canvas id="c3" width="400" height="300"></canvas><div class="wover"><span class="wtag tt2">Fragrance</span><div class="wname">Velvet No.5</div><div class="wsub">Hero campaign · Meta</div></div></div>
+      <div class="wc sm"><canvas id="c4" width="400" height="300"></canvas><div class="wover"><span class="wtag tg">Supplements</span><div class="wname">Pulse Labs</div><div class="wsub">Brand launch · full kit</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sv-bg" id="services">
+  <div class="con">
+    <div class="chip rev">What We Make</div>
+    <h2 class="sec-h rev d1">THE FULL<br>ARSENAL</h2>
+    <div class="sv-grid">
+      <div class="svc rev d1"><div class="svc-icon iv">🎬</div><div class="svc-n">01 / Motion</div><div class="svc-t">Cinematic Motion</div><p class="svc-d">High-end product clips, ambient motion, transitions built for social, paid ads and hero sections. The content that converts.</p></div>
+      <div class="svc rev d2"><div class="svc-icon ic">📸</div><div class="svc-n">02 / Stills</div><div class="svc-t">Premium Stills</div><p class="svc-d">AI-crafted product photography in luxury environments — marble, silk, gold light. Imagery that justifies premium pricing.</p></div>
+      <div class="svc rev d3"><div class="svc-icon it">⚡</div><div class="svc-n">03 / Ads</div><div class="svc-t">Ad Creatives</div><p class="svc-d">Platform-native assets for Meta, TikTok, Pinterest. Multiple formats and testing variants built around what converts.</p></div>
+      <div class="svc rev d4"><div class="svc-icon ig">🚀</div><div class="svc-n">04 / Launch</div><div class="svc-t">Launch Kits</div><p class="svc-d">Full ecommerce packages — Shopify banners, email systems, packaging mockups, campaign identity. One drop, fully loaded.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="proc-bg">
+  <div class="con">
+    <div class="chip rev">How It Works</div>
+    <h2 class="sec-h rev d1">DEAD SIMPLE.</h2>
+    <div class="pgrid">
+      <div class="ps rev d1"><div class="pb b1">01</div><div class="ps-t">Discover</div><p class="ps-d">Find us on Instagram or TikTok. Our feed is the pitch deck — you'll know immediately.</p></div>
+      <div class="ps rev d2"><div class="pb b2">02</div><div class="ps-t">Buy Online</div><p class="ps-d">Pick your pack and purchase directly online. No calls. No onboarding. Three minutes flat.</p></div>
+      <div class="ps rev d3"><div class="pb b3">03</div><div class="ps-t">Receive Assets</div><p class="ps-d">Cinematic, production-ready assets land in your inbox inside the agreed timeframe.</p></div>
+      <div class="ps rev d4"><div class="pb b4">04</div><div class="ps-t">Scale Up</div><p class="ps-d">Love it? Subscribe for monthly drops. Build, test, convert. Repeat indefinitely.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="con">
+    <div class="chip rev">Creative Packs</div>
+    <h2 class="sec-h rev d1">NO CALLS.<br>NO MEETINGS.<br><span class="grad">JUST FIRE.</span></h2>
+    <div class="pgrid2">
+      <div class="pc rev d1">
+        <div class="pc-name">Starter Pack</div>
+        <div class="pc-price">$690</div>
+        <div class="pc-per">one-time · 5 day delivery</div>
+        <div class="pdiv"></div>
+        <ul class="plist"><li><span class="ck">✓</span>5 cinematic product stills</li><li><span class="ck">✓</span>2–3 premium motion clips</li><li><span class="ck">✓</span>Ad-ready formats included</li><li><span class="ck">✓</span>2 revision rounds</li></ul>
+        <div class="pmarg">~65% gross margin</div>
+        <button class="pbtn po">Get This Pack</button>
+      </div>
+      <div class="pc hot rev d2">
+        <div class="hbadge">Most Popular</div>
+        <div class="pc-name">Growth Pack</div>
+        <div class="pc-price">$1,990</div>
+        <div class="pc-per">one-time · 10 day delivery</div>
+        <div class="pdiv"></div>
+        <ul class="plist"><li><span class="ck">✓</span>15 cinematic product stills</li><li><span class="ck">✓</span>8–10 premium motion clips</li><li><span class="ck">✓</span>Multi-platform ad formats</li><li><span class="ck">✓</span>Email banner system</li><li><span class="ck">✓</span>3 revision rounds</li></ul>
+        <div class="pmarg">~68% gross margin</div>
+        <button class="pbtn pf">Get This Pack</button>
+      </div>
+      <div class="pc rev d3">
+        <div class="pc-name">Hero Campaign</div>
+        <div class="pc-price">$7k+</div>
+        <div class="pc-per">premium · custom timeline</div>
+        <div class="pdiv"></div>
+        <ul class="plist"><li><span class="ck">✓</span>Full campaign visual identity</li><li><span class="ck">✓</span>Hero motion asset suite</li><li><span class="ck">✓</span>Shopify hero banners</li><li><span class="ck">✓</span>Launch creative system</li><li><span class="ck">✓</span>Priority production</li></ul>
+        <div class="pmarg">~70% gross margin</div>
+        <button class="pbtn po">Let's Talk</button>
+      </div>
+    </div>
+    <div class="rbar rev">
+      <div><div class="rb-lbl">Recurring</div><div class="rb-title">Monthly Creative Refresh</div></div>
+      <div class="rb-desc">Fresh monthly asset drops. Test more. Convert more. Never run dry on creative.</div>
+      <div class="rb-price">$1k–$3k/mo</div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-bg" id="calculator">
+  <div class="con">
+    <div class="chip rev">Revenue Calculator</div>
+    <h2 class="sec-h rev d1">BUILD YOUR<br>NUMBERS.</h2>
+    <p style="color:rgba(255,255,255,.42);font-size:.82rem;max-width:380px;line-height:1.7;margin-bottom:1.8rem" class="rev d2">Drag the sliders to model your monthly profit potential.</p>
+    <div class="calc-box rev d2">
+      <div>
+        <div class="clbl">Pack type</div>
+        <div class="ptabs" id="ptabs">
+          <button class="ptab" data-p="690" data-c="230">Starter $690</button>
+          <button class="ptab on" data-p="1990" data-c="630">Growth $1,990</button>
+          <button class="ptab" data-p="7000" data-c="2100">Hero $7k</button>
+        </div>
+        <div class="cslide"><div class="rhead"><span class="clbl">Packs per month</span><span class="rval" id="rv1">4</span></div><input type="range" min="1" max="20" value="4" step="1" id="r1"></div>
+        <div class="cslide"><div class="rhead"><span class="clbl">Monthly subscribers</span><span class="rval" id="rv2">2</span></div><input type="range" min="0" max="15" value="2" step="1" id="r2"></div>
+        <div class="cslide"><div class="rhead"><span class="clbl">Avg refresh rate</span><span class="rval" id="rv3">$1,500</span></div><input type="range" min="1000" max="3000" value="1500" step="100" id="r3"></div>
+      </div>
+      <div class="calc-r">
+        <div class="crow"><span class="cl">Pack revenue</span><span class="cv cvv" id="cr1">$7,960</span></div>
+        <div class="crow"><span class="cl">Subscription revenue</span><span class="cv cvv" id="cr2">$3,000</span></div>
+        <div class="crow"><span class="cl">Total revenue</span><span class="cv" id="cr3">$10,960</span></div>
+        <div class="crow"><span class="cl">Est. costs</span><span class="cv cvc" id="cr4">−$3,780</span></div>
+        <div class="total">
+          <div class="tl">Monthly Profit</div>
+          <div class="tn" id="crp">$7,180</div>
+          <div><span class="tm" id="crm">~65% margin</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NICHES -->
+<div class="niche-sec">
+  <div style="text-align:center;padding:0 1.25rem 1.6rem">
+    <div class="chip">Best-Fit Brands</div>
+    <h2 class="sec-h" style="font-size:clamp(1.6rem,4vw,2.6rem)">WE LOVE BRANDS<br>WITH TASTE</h2>
+  </div>
+  <div class="nrow"><div class="ntrack nr1"><span class="ntag nv">Matcha</span><span class="ntag nc">Skincare</span><span class="ntag nt">Supplements</span><span class="ntag nv">Fragrances</span><span class="ntag nc">Beverages</span><span class="ntag nt">Wellness</span><span class="ntag nv">Luxury Ecommerce</span><span class="ntag nc">Candles</span><span class="ntag nt">Fashion Accessories</span><span class="ntag nv">Modern Consumer</span><span class="ntag nv">Matcha</span><span class="ntag nc">Skincare</span><span class="ntag nt">Supplements</span><span class="ntag nv">Fragrances</span><span class="ntag nc">Beverages</span><span class="ntag nt">Wellness</span><span class="ntag nv">Luxury Ecommerce</span><span class="ntag nc">Candles</span><span class="ntag nt">Fashion Accessories</span><span class="ntag nv">Modern Consumer</span></div></div>
+  <div class="nrow" style="margin-top:.45rem"><div class="ntrack nr2"><span class="ntag nt">Haircare</span><span class="ntag nv">Coffee Brands</span><span class="ntag nc">Activewear</span><span class="ntag nt">Homewares</span><span class="ntag nv">Pet Brands</span><span class="ntag nc">Functional Foods</span><span class="ntag nt">Body Care</span><span class="ntag nv">Jewellery</span><span class="ntag nc">Nootropics</span><span class="ntag nt">Beauty Tech</span><span class="ntag nt">Haircare</span><span class="ntag nv">Coffee Brands</span><span class="ntag nc">Activewear</span><span class="ntag nt">Homewares</span><span class="ntag nv">Pet Brands</span><span class="ntag nc">Functional Foods</span><span class="ntag nt">Body Care</span><span class="ntag nv">Jewellery</span><span class="ntag nc">Nootropics</span><span class="ntag nt">Beauty Tech</span></div></div>
+</div>
+
+<!-- TECH -->
+<section class="tech-sec">
+  <div class="con">
+    <div class="chip rev">Powered By</div>
+    <h2 class="sec-h rev d1" style="text-align:center">THE STACK</h2>
+    <div class="tpills rev d2"><span class="tp tp-on">Magnific</span><span class="tp tp-off">Runway</span><span class="tp tp-off">Kling</span><span class="tp tp-off">Seedance</span><span class="tp tp-off">Midjourney</span><span class="tp tp-off">Photoshop AI</span><span class="tp tp-off">ChatGPT</span><span class="tp tp-off">Topaz AI</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="con">
+    <div class="ag">
+      <div class="rev">
+        <div class="sgrid">
+          <div class="stat"><span class="sn snv">60%+</span><span class="sl">Min Gross Margin</span></div>
+          <div class="stat"><span class="sn snt">5x</span><span class="sl">Faster Than Studios</span></div>
+          <div class="stat"><span class="sn snv">0</span><span class="sl">Meetings Required</span></div>
+          <div class="stat"><span class="sn snt">∞</span><span class="sl">Content Demand Growth</span></div>
+        </div>
+        <div class="insight"><p>"AI increases content demand — it doesn't reduce it. Most brands still lack creative taste, visual direction and systems. That's exactly where the opportunity lives."</p><footer>— Motion Merchant Strategy</footer></div>
+      </div>
+      <div class="rev d2">
+        <div class="chip">Why Us</div>
+        <h2 class="sec-h" style="font-size:clamp(1.8rem,4vw,3rem)">STUDIO QUALITY.<br><span class="grad">AI SPEED.</span></h2>
+        <p class="about-body">We're not a generic AI content farm. Motion Merchant combines the aesthetic intelligence of a premium production studio with AI-assisted workflows that deliver in days, not weeks.</p>
+        <ul class="apts">
+          <li><span class="apc">→</span>Motion-first. Static is commoditising fast. We're already ahead of the curve.</li>
+          <li><span class="apc">→</span>Productised delivery. Standardised, systemised, scalable. No scope creep.</li>
+          <li><span class="apc">→</span>Buy online. Receive assets. No sales calls, no onboarding, no friction.</li>
+          <li><span class="apc">→</span>Premium positioning. We know what converts — and what looks good doing it.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <div class="cg1"></div><div class="cg2"></div>
+  <div class="rev" style="position:relative;z-index:1">
+    <div class="chip" style="margin-bottom:1.1rem">Ready?</div>
+    <h2 class="cta-h">
+      <span style="display:block">LET'S MAKE</span>
+      <span class="outline" style="display:block">SOMETHING</span>
+      <span class="grad" style="display:block">UNFORGETTABLE.</span>
+    </h2>
+    <p class="cta-sub">Pick a pack. No calls. No waiting. Cinematic creative that makes your brand impossible to scroll past.</p>
+    <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1">
+      <a href="#pricing" class="btn btn-p" style="font-size:.85rem;padding:.95rem 2.2rem">Shop Creative Packs →</a>
+      <a href="#reel" class="btn btn-g">Watch the Reel</a>
+    </div>
+    <div class="cta-note">Delivered in 5–10 days · No calls required · 60–75% margins</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">Motion<em>.</em>Merchant</div>
+  <p>© 2025 Motion Merchant Studio</p>
+  <div class="flinks">
+    <a href="#reel">Reel</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#about">About</a>
+  </div>
+</footer>
+
+<script>
+// NAV
+window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('stuck',scrollY>40)},{passive:true});
+function closeNav(){document.getElementById('nul').classList.remove('open');document.getElementById('ham').classList.remove('open')}
+document.getElementById('ham').addEventListener('click',function(){this.classList.toggle('open');document.getElementById('nul').classList.toggle('open')});
+
+// REVEAL
+var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08});
+document.querySelectorAll('.rev').forEach(function(el){ro.observe(el)});
+
+// VIDEO
+function toggleV(){var v=document.getElementById('vid'),b=document.getElementById('pbtn');if(!v)return;if(v.paused){v.play();b.classList.add('hide')}else{v.pause();b.classList.remove('hide')}}
+document.addEventListener('DOMContentLoaded',function(){var sv=document.getElementById('vid');if(sv)sv.addEventListener('click',toggleV)});
+
+// HERO CANVAS
+(function(){
+  var c=document.getElementById('hc');
+  if(!c)return;
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
+  resize();
+  window.addEventListener('resize',resize,{passive:true});
+  var ctx=c.getContext('2d'),t=0;
+  var pts=[];
+  for(var i=0;i<65;i++)pts.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.0006,vy:(Math.random()-.5)*.0006,r:Math.random()*1.6+.4,h:Math.random()});
+  function frame(){
+    var W=c.width,H=c.height;
+    ctx.fillStyle='#08070F';ctx.fillRect(0,0,W,H);
+    var g=ctx.createRadialGradient(W*.5,H*.35,0,W*.5,H*.35,W*.65);
+    g.addColorStop(0,'rgba(109,40,217,.16)');g.addColorStop(.6,'rgba(139,92,246,.05)');g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    g=ctx.createRadialGradient(W*.1,H*.85,0,W*.1,H*.85,W*.4);
+    g.addColorStop(0,'rgba(244,63,94,.08)');g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(255,255,255,.018)';ctx.lineWidth=.5;
+    for(var x=0;x<W;x+=64){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(var y=0;y<H;y+=64){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i];
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=1;if(p.x>1)p.x=0;
+      if(p.y<0)p.y=1;if(p.y>1)p.y=0;
+      var a=.05+Math.sin(t*1.1+p.h*12)*.04;
+      ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.h>.65?'rgba(139,92,246,'+a+')':p.h>.35?'rgba(244,63,94,'+a+')':'rgba(6,182,212,'+a+')';
+      ctx.fill();
+    }
+    t+=.015;requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// CANVAS PRODUCTS
+function makeC(id,fn){
+  var c=document.getElementById(id);
+  if(!c)return;
+  var ctx=c.getContext('2d'),t=0;
+  function frame(){fn(ctx,c.width,c.height,t);t+=.018;requestAnimationFrame(frame)}
+  frame();
+}
+
+makeC('c1',function(ctx,W,H,t){
+  ctx.fillStyle='#040c03';ctx.fillRect(0,0,W,H);
+  var g=ctx.createRadialGradient(W*.5,H*.5,0,W*.5,H*.5,W*.55);
+  g.addColorStop(0,'rgba(34,160,18,'+(0.13+Math.sin(t*.38)*.04)+')');g.addColorStop(.55,'rgba(10,55,5,.09)');g.addColorStop(1,'transparent');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  var g2=ctx.createRadialGradient(W*.08,H*.82,0,W*.08,H*.82,W*.32);
+  g2.addColorStop(0,'rgba(139,92,246,.09)');g2.addColorStop(1,'transparent');
+  ctx.fillStyle=g2;ctx.fillRect(0,0,W,H);
+  for(var i=0;i<3;i++){
+    ctx.strokeStyle='rgba(70,190,50,'+(0.055+i*.015)+')';ctx.lineWidth=.7;
+    ctx.beginPath();ctx.ellipse(W*.5,H*.48,W*(.3+i*.05)*(1+Math.sin(t*.28+i)*.035),H*(.26+i*.04)*(1+Math.cos(t*.28+i)*.035),0,0,Math.PI*2);ctx.stroke();
+  }
+  var sz=Math.min(W,H)*.11,bx=W*.5,by=H*.48+Math.sin(t*.75)*5,th=sz*2.7;
+  ctx.save();ctx.translate(bx,by);
+  var bg=ctx.createLinearGradient(-sz,0,sz,0);
+  bg.addColorStop(0,'#061304');bg.addColorStop(.3,'#174d0e');bg.addColorStop(.65,'#42bb1e');bg.addColorStop(.85,'#80ee55');bg.addColorStop(1,'#1b5c0a');
+  ctx.fillStyle=bg;ctx.beginPath();ctx.roundRect(-sz,-th*.5,sz*2,th,sz*.16);ctx.fill();
+  var rim=ctx.createLinearGradient(-sz,-th*.5,sz,-th*.5);
+  rim.addColorStop(0,'#0e2a08');rim.addColorStop(.5,'#6cd840');rim.addColorStop(1,'#0e2a08');
+  ctx.fillStyle=rim;ctx.beginPath();ctx.ellipse(0,-th*.5,sz,sz*.22,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,.32)';ctx.beginPath();ctx.roundRect(-sz*.72,-th*.28,sz*1.44,th*.52,4);ctx.fill();
+  ctx.fillStyle='rgba(128,238,85,.9)';ctx.font='bold '+(sz*.55)+'px sans-serif';ctx.textAlign='center';ctx.fillText('MATCHA',0,-th*.1);
+  ctx.fillStyle='rgba(255,255,255,.55)';ctx.font=(sz*.38)+'px sans-serif';ctx.fillText('RITUAL',0,th*.06);ctx.fillText('30g Ceremonial',0,th*.2);
+  ctx.restore();
+  ctx.fillStyle='rgba(128,238,85,.75)';ctx.beginPath();ctx.arc(bx+Math.cos(t*1.1)*W*.28,by+Math.sin(t*1.1)*H*.2,2.5,0,Math.PI*2);ctx.fill();
+});
+
+makeC('c2',function(ctx,W,H,t){
+  ctx.fillStyle='#070410';ctx.fillRect(0,0,W,H);
+  var g=ctx.createRadialGradient(W*.5,H*.42,0,W*.5,H*.42,H*.42);
+  g.addColorStop(0,'rgba(192,58,150,'+(0.12+Math.sin(t*.38)*.04)+')');g.addColorStop(.5,'rgba(75,18,140,.08)');g.addColorStop(1,'transparent');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  var bx=W*.5,by=H*.5+Math.sin(t*.62)*8,sz=Math.min(W,H)*.1,bh=sz*4.2,bw=sz*.95;
+  ctx.save();ctx.translate(bx,by);
+  var bg=ctx.createLinearGradient(-bw,0,bw,0);
+  bg.addColorStop(0,'#0d0520');bg.addColorStop(.28,'#26084a');bg.addColorStop(.68,'#b455b0');bg.addColorStop(.88,'#e090de');bg.addColorStop(1,'#620a62');
+  ctx.fillStyle=bg;ctx.beginPath();ctx.roundRect(-bw,-bh*.5,bw*2,bh,8);ctx.fill();
+  var lq=ctx.createLinearGradient(0,-bh*.2,0,bh*.3);
+  lq.addColorStop(0,'rgba(210,100,210,.44)');lq.addColorStop(1,'rgba(148,45,168,.24)');
+  ctx.fillStyle=lq;ctx.beginPath();ctx.roundRect(-bw*.72,-bh*.2,bw*1.44,bh*.5,4);ctx.fill();
+  var nk=ctx.createLinearGradient(-bw*.45,0,bw*.45,0);
+  nk.addColorStop(0,'#0d0520');nk.addColorStop(.5,'#8535a8');nk.addColorStop(1,'#0d0520');
+  ctx.fillStyle=nk;ctx.beginPath();ctx.roundRect(-bw*.42,-bh*.5-sz*.85,bw*.84,sz*.88,4);ctx.fill();
+  ctx.fillStyle='rgba(220,150,240,.2)';ctx.beginPath();ctx.ellipse(0,-bh*.5-sz*.88,bw*.44,bw*.44,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(195,120,220,.8)';ctx.beginPath();ctx.roundRect(-bw*.38,-bh*.5-sz*.95,bw*.76,sz*.14,3);ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,.3)';ctx.beginPath();ctx.roundRect(-bw*.7,-bh*.2,bw*1.4,bh*.46,4);ctx.fill();
+  ctx.fillStyle='rgba(232,175,252,.92)';ctx.font='bold '+(sz*.62)+'px sans-serif';ctx.textAlign='center';ctx.fillText('AURA',0,-bh*.06);
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font=(sz*.4)+'px sans-serif';ctx.fillText('PEPTIDE SERUM',0,bh*.08);ctx.fillText('30ml',0,bh*.2);
+  ctx.restore();
+  for(var i=0;i<8;i++){
+    var a=t+i*Math.PI*.25,r=Math.min(W,H)*.42+Math.sin(t*.75+i)*Math.min(W,H)*.06;
+    ctx.fillStyle='rgba(210,120,255,'+(0.15+Math.sin(t*1.8+i)*.1)+')';
+    ctx.beginPath();ctx.arc(bx+Math.cos(a)*r,by+Math.sin(a)*r*.55,1.4,0,Math.PI*2);ctx.fill();
+  }
+});
+
+makeC('c3',function(ctx,W,H,t){
+  ctx.fillStyle='#090705';ctx.fillRect(0,0,W,H);
+  var g=ctx.createRadialGradient(W*.5,H*.5,0,W*.5,H*.5,W*.52);
+  g.addColorStop(0,'rgba(210,115,0,'+(0.1+Math.sin(t*.45)*.03)+')');g.addColorStop(.5,'rgba(155,55,0,.06)');g.addColorStop(1,'transparent');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  var bx=W*.5,by=H*.5+Math.sin(t*.55)*5,bw=Math.min(W,H)*.18,bh=Math.min(W,H)*.32;
+  ctx.save();ctx.translate(bx,by);
+  var bg=ctx.createLinearGradient(-bw,0,bw,0);
+  bg.addColorStop(0,'#0e0902');bg.addColorStop(.22,'#3a2205');bg.addColorStop(.6,'#c07818');bg.addColorStop(.82,'#f0be55');bg.addColorStop(1,'#5e3504');
+  ctx.fillStyle=bg;ctx.beginPath();ctx.roundRect(-bw,-bh,bw*2,bh*2,4);ctx.fill();
+  var lq=ctx.createLinearGradient(0,-bh*.4,0,bh*.6);
+  lq.addColorStop(0,'rgba(190,110,15,.48)');lq.addColorStop(1,'rgba(140,75,8,.28)');
+  ctx.fillStyle=lq;ctx.beginPath();ctx.roundRect(-bw*.78,-bh*.4,bw*1.56,bh,3);ctx.fill();
+  ctx.fillStyle='#c07818';ctx.beginPath();ctx.roundRect(-bw*.54,-bh-bw*.66,bw*1.08,bw*.22,3);ctx.fill();
+  ctx.fillStyle='rgba(175,110,25,.9)';ctx.beginPath();ctx.roundRect(-bw*.1,-bh-bw*.98,bw*.2,bw*.34,2);ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,.38)';ctx.beginPath();ctx.roundRect(-bw*.72,-bh*.5,bw*1.44,bh*.9,3);ctx.fill();
+  ctx.fillStyle='rgba(235,172,60,.95)';ctx.font='bold '+(bw*.58)+'px serif';ctx.textAlign='center';ctx.fillText('VELVET',0,-bh*.18);
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font=(bw*.4)+'px serif';ctx.fillText('No. 5',0,bh*.02);
+  ctx.fillStyle='rgba(200,145,35,.42)';ctx.font=(bw*.28)+'px sans-serif';ctx.fillText('EAU DE PARFUM',0,bh*.2);
+  ctx.restore();
+  ctx.strokeStyle='rgba(192,120,25,'+(0.1+Math.sin(t*.65)*.05)+')';ctx.lineWidth=.8;
+  ctx.beginPath();ctx.ellipse(bx,by,W*.38,H*.22,0,0,Math.PI*2);ctx.stroke();
+});
+
+makeC('c4',function(ctx,W,H,t){
+  ctx.fillStyle='#040a0e';ctx.fillRect(0,0,W,H);
+  var g=ctx.createRadialGradient(W*.5,H*.5,0,W*.5,H*.5,W*.52);
+  g.addColorStop(0,'rgba(6,182,212,'+(0.1+Math.sin(t*.42)*.04)+')');g.addColorStop(.5,'rgba(15,90,190,.06)');g.addColorStop(1,'transparent');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  var bx=W*.5,by=H*.5+Math.sin(t*.68)*6,bw=Math.min(W,H)*.15,bh=Math.min(W,H)*.34;
+  ctx.save();ctx.translate(bx,by);
+  var bg=ctx.createLinearGradient(-bw,0,bw,0);
+  bg.addColorStop(0,'#03080e');bg.addColorStop(.22,'#062840');bg.addColorStop(.62,'#12b8cc');bg.addColorStop(.84,'#55e8f5');bg.addColorStop(1,'#076878');
+  ctx.fillStyle=bg;ctx.beginPath();ctx.roundRect(-bw,-bh,bw*2,bh*2,bw*.65);ctx.fill();
+  var cap=ctx.createLinearGradient(-bw*.9,0,bw*.9,0);
+  cap.addColorStop(0,'#062840');cap.addColorStop(.5,'#12b8cc');cap.addColorStop(1,'#062840');
+  ctx.fillStyle=cap;ctx.beginPath();ctx.roundRect(-bw*.9,-bh-bw*.55,bw*1.8,bw*.58,bw*.28);ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,.32)';ctx.beginPath();ctx.roundRect(-bw*.75,-bh*.58,bw*1.5,bh*1.05,4);ctx.fill();
+  ctx.fillStyle='rgba(0,240,200,.95)';ctx.font='bold '+(bw*.65)+'px sans-serif';ctx.textAlign='center';ctx.fillText('PULSE',0,-bh*.2);
+  ctx.fillStyle='rgba(255,255,255,.55)';ctx.font=(bw*.42)+'px sans-serif';ctx.fillText('LABS',0,0);ctx.fillText('90 Caps',0,bh*.2);
+  ctx.restore();
+  for(var i=0;i<12;i++){
+    var a=t*.85+i*(Math.PI*2/12),r=Math.min(W,H)*.42+Math.sin(t+i)*Math.min(W,H)*.05;
+    ctx.fillStyle=i%3===0?'rgba(59,130,255,'+(0.18+Math.sin(t*1.4+i)*.1)+')':'rgba(6,182,212,'+(0.18+Math.sin(t*1.4+i)*.1)+')';
+    ctx.beginPath();ctx.arc(bx+Math.cos(a)*r,by+Math.sin(a)*r*.52,1.4,0,Math.PI*2);ctx.fill();
+  }
+});
+
+// CALCULATOR
+(function(){
+  var pp=1990,pc=630;
+  document.querySelectorAll('.ptab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      document.querySelectorAll('.ptab').forEach(function(t){t.classList.remove('on')});
+      this.classList.add('on');
+      pp=+this.dataset.p;pc=+this.dataset.c;calc();
+    });
+  });
+  function fmt(n){return '$'+Math.round(n).toLocaleString()}
+  function calc(){
+    var p=+document.getElementById('r1').value,s=+document.getElementById('r2').value,r=+document.getElementById('r3').value;
+    document.getElementById('rv1').textContent=p;
+    document.getElementById('rv2').textContent=s;
+    document.getElementById('rv3').textContent=fmt(r);
+    var pr=p*pp,sr=s*r,gr=pr+sr,costs=p*pc+s*r*.32,profit=gr-costs,margin=gr>0?Math.round(profit/gr*100):0;
+    document.getElementById('cr1').textContent=fmt(pr);
+    document.getElementById('cr2').textContent=fmt(sr);
+    document.getElementById('cr3').textContent=fmt(gr);
+    document.getElementById('cr4').textContent='−'+fmt(costs);
+    document.getElementById('crp').textContent=fmt(profit);
+    document.getElementById('crm').textContent='~'+margin+'% margin';
+  }
+  document.getElementById('r1').addEventListener('input',calc);
+  document.getElementById('r2').addEventListener('input',calc);
+  document.getElementById('r3').addEventListener('input',calc);
+  calc();
+})();
+</script>
+</body>
+</html>
